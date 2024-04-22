@@ -110,19 +110,25 @@ return {
     end,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
-  { 'tamton-aquib/staline.nvim' },
   {
-    'folke/zen-mode.nvim',
-    keys = {
-      {
-        '<leader>tz',
-        function()
-          require('zen-mode').toggle()
-        end,
-        desc = '[T]oggle [Z]en',
-      },
-    },
+    'tamton-aquib/staline.nvim',
+    config = function()
+      require('staline').setup()
+      require('stabline').setup()
+    end,
   },
+  -- {
+  --   'folke/zen-mode.nvim',
+  --   keys = {
+  --     {
+  --       '<leader>tz',
+  --       function()
+  --         require('zen-mode').toggle()
+  --       end,
+  --       desc = '[T]oggle [Z]en',
+  --     },
+  --   },
+  -- },
   {
     'NeogitOrg/neogit',
     dependencies = {
@@ -138,6 +144,45 @@ return {
           require('neogit').open()
         end,
         desc = '[G]it [G]ud',
+      },
+    },
+  },
+  {
+    'nvim-telescope/telescope-ui-select.nvim',
+    init = function()
+      require('telescope').load_extension 'ui-select'
+      pcall(require('telescope').load_extension, 'ui-select')
+    end,
+  },
+  {
+    'nvim-telescope/telescope-project.nvim',
+    init = function()
+      pcall(require('telescope').load_extension, 'project')
+    end,
+  },
+  {
+    'natecraddock/workspaces.nvim',
+    keys = {
+      {
+        '<leader><Tab>.',
+        function()
+          require('telescope').extensions.workspaces.workspaces()
+        end,
+        desc = 'Switch Workspace',
+      },
+      {
+        '<leader><Tab>c',
+        function()
+          require('workspaces').add(vim.fn.getcwd(), vim.fn.fnamemodify(vim.fn.getcwd(), ':t'))
+        end,
+        desc = 'Add Workspace',
+      },
+    },
+    opts = {
+      cd_type = 'tab',
+      hooks = {
+        open_pre = 'tabnew',
+        open = 'Telescope find_files',
       },
     },
   },

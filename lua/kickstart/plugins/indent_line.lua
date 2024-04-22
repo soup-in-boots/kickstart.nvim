@@ -4,6 +4,11 @@ return {
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
-    opts = {},
+    opts = {
+      exclude = {
+        filetypes = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy', 'mason', 'neogit' },
+        buftypes = { 'terminal', 'nofile' },
+      },
+    },
   },
 }
