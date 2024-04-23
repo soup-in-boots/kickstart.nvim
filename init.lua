@@ -92,7 +92,10 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
-vim.g.material_style = 'deep ocean'
+vim.g.material_style = 'palenight'
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 3
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -153,7 +156,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 1000
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -394,7 +397,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>p', function()
-        require('telescope').extensions.project.project { display_type = 'full' }
+        require('telescope').extensions.project.project { display_type = 'dropdown' }
       end, { desc = '[P]roject' })
 
       -- Slightly advanced example of overriding default behavior and theme
@@ -808,6 +811,9 @@ require('lazy').setup({
       },
       high_visibility = {
         darker = true,
+      },
+      custom_highlights = {
+        NeoTreeCursorLine = { bg = '#292D3E', fg = '#AB47BC' },
       },
     },
     init = function()

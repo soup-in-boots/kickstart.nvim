@@ -10,7 +10,7 @@ return {
       {
         '<leader>op',
         function()
-          require('neo-tree.command').execute { toggle = true, source = 'filesystem', position = 'left', update_focused_file = true }
+          require('neo-tree.command').execute { toggle = true, source = 'filesystem', position = 'left', update_focused_file = true, reveal = true }
         end,
         desc = '[O]pen [P]roject Browser',
       },
@@ -103,20 +103,20 @@ return {
     },
   },
   {
-    'nvimdev/dashboard-nvim',
-    event = 'VimEnter',
-    config = function()
-      require('dashboard').setup {}
-    end,
+    'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      options = {
+        theme = 'palenight',
+        component_separators = '',
+        section_separators = {
+          left = '',
+          right = '',
+        },
+      },
+    },
   },
-  {
-    'tamton-aquib/staline.nvim',
-    config = function()
-      require('staline').setup()
-      require('stabline').setup()
-    end,
-  },
+
   -- {
   --   'folke/zen-mode.nvim',
   --   keys = {
@@ -161,29 +161,29 @@ return {
     end,
   },
   {
-    'natecraddock/workspaces.nvim',
+    'christoomey/vim-tmux-navigator',
+    cmd = {
+      'TmuxNavigateLeft',
+      'TmuxNavigateDown',
+      'TmuxNavigateUp',
+      'TmuxNavigateRight',
+      'TmuxNavigatePrevious',
+    },
     keys = {
-      {
-        '<leader><Tab>.',
-        function()
-          require('telescope').extensions.workspaces.workspaces()
-        end,
-        desc = 'Switch Workspace',
-      },
-      {
-        '<leader><Tab>c',
-        function()
-          require('workspaces').add(vim.fn.getcwd(), vim.fn.fnamemodify(vim.fn.getcwd(), ':t'))
-        end,
-        desc = 'Add Workspace',
-      },
+      { '<C-h>', 'TmuxNavigateLeft' },
+      { '<C-j>', 'TmuxNavigateDown' },
+      { '<C-k>', 'TmuxNavigateUp' },
+      { '<C-l>', 'TmuxNavigateRight' },
+      { '<C-\\>', 'TmuxNavigatePrevious' },
     },
-    opts = {
-      cd_type = 'tab',
-      hooks = {
-        open_pre = 'tabnew',
-        open = 'Telescope find_files',
-      },
+  },
+  {
+    'willothy/nvim-cokeline',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- Required for v0.4.0+
+      'nvim-tree/nvim-web-devicons', -- If you want devicons
+      'stevearc/resession.nvim', -- Optional, for persistent history
     },
+    config = true,
   },
 }
