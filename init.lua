@@ -95,7 +95,7 @@ vim.g.have_nerd_font = true
 vim.g.material_style = 'palenight'
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldlevel = 3
+vim.opt.foldlevel = 4
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
